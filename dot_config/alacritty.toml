@@ -1,0 +1,8 @@
+[font]
+size = 10
+normal.family = "Cascadia Code NF"
+normal.style = "Regular"
+offset.y = -2
+
+[colors.primary]
+background = "#000000"

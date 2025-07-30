@@ -1,0 +1,4 @@
+{{ if ne .chezmoi.os "windows" }}
+Documents
+_symlink-config_windows.ps1
+{{ end }}
