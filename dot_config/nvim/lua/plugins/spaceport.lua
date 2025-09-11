@@ -3,6 +3,28 @@ return {
 		"CWood-sdf/spaceport.nvim",
 		lazy = false, -- load spaceport immediately
 		config = function()
+			local ascii_arts_table = {
+				{
+					ascii_art = {
+						[[                                                     ]],
+						[[  ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓ ]],
+						[[  ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒ ]],
+						[[ ▓██  ▀█ ██▒▒███   ▒██░  ██▒ ▓██  █▒░▒██▒▓██    ▓██░ ]],
+						[[ ▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██  ]],
+						[[ ▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒ ]],
+						[[ ░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░ ]],
+						[[ ░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░ ]],
+						[[    ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░    ]],
+						[[          ░    ░  ░    ░ ░        ░   ░         ░    ]],
+						[[                                 ░                   ]],
+						[[                                                     ]],
+					},
+					colorOpts = {
+						fg = "#05ac00",
+					},
+				},
+			}
+
 			require("spaceport").setup({
 				-- This prevents the same directory from being repeated multiple times in the recents section
 				-- For example, I have replaceDirs set to { {"~/projects", "_" } } so that ~/projects is not repeated a ton
@@ -30,9 +52,39 @@ return {
 				-- The sections to show on the screen (see `Customization` for more info)
 				sections = {
 					"_global_remaps",
-					"name",
-					"remaps",
-					"recents",
+					{
+						lines = function()
+							math.randomseed(os.time())
+
+							if not ascii_arts_table or #ascii_arts_table == 0 then
+								return {}
+							end
+
+							local random_index = math.random(#ascii_arts_table)
+							local random_art_entry = ascii_arts_table[random_index]
+
+							local result = {}
+							for _ = 1, 5 do
+								table.insert(result, "")
+							end
+
+							if random_art_entry and random_art_entry.ascii_art and random_art_entry.colorOpts then
+								for _, line in ipairs(random_art_entry.ascii_art) do
+									local formatted_line = {
+										{
+											line,
+											colorOpts = random_art_entry.colorOpts,
+										},
+									}
+									table.insert(result, formatted_line)
+								end
+							end
+
+							return result
+						end,
+					},
+					{ "recents", topBuffer = 5 },
+					{ "remaps", topBuffer = 20, title = "" },
 				},
 
 				-- toggle or set file and directory icons.
@@ -52,7 +104,7 @@ return {
 				-- The path to the log file
 				logPath = vim.fn.stdpath("log") .. "/spaceport.log",
 				-- How many hours to preserve each log entry for
-				logPreserveHours = 24,
+				logPreserveHrs = 24,
 			})
 
 			local original_values = {}
