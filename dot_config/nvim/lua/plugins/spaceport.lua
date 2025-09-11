@@ -54,6 +54,27 @@ return {
 				-- How many hours to preserve each log entry for
 				logPreserveHours = 24,
 			})
+
+			local original_values = {}
+
+			vim.api.nvim_create_autocmd({ "User" }, {
+				pattern = "SpaceportEnter",
+				callback = function()
+					original_values.listchars = vim.opt.listchars:get()
+					original_values.statuscolumn = vim.o.statuscolumn
+
+					vim.opt.listchars = {}
+					vim.o.statuscolumn = ""
+				end,
+			})
+
+			vim.api.nvim_create_autocmd({ "User" }, {
+				pattern = "SpaceportDone",
+				callback = function()
+					vim.opt.listchars = original_values.listchars
+					vim.o.statuscolumn = original_values.statuscolumn
+				end,
+			})
 		end,
 	},
 }
