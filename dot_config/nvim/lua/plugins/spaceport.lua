@@ -39,7 +39,7 @@ return {
 				replaceHome = true,
 
 				-- What to do when entering a directory, personally I use "Oil .", but Ex is preinstalled with neovim
-				projectEntry = "Ex",
+				projectEntry = "bd",
 
 				-- The farthest back in time that directories should be shown
 				-- I personally use "yesterday" so that there aren't millions of directories on the screen.
@@ -107,14 +107,14 @@ return {
 				logPreserveHrs = 24,
 			})
 
-			local original_values = {}
+			local original_values = {
+				listchars = vim.opt.listchars:get(),
+				statuscolumn = vim.o.statuscolumn,
+			}
 
 			vim.api.nvim_create_autocmd({ "User" }, {
 				pattern = "SpaceportEnter",
 				callback = function()
-					original_values.listchars = vim.opt.listchars:get()
-					original_values.statuscolumn = vim.o.statuscolumn
-
 					vim.opt.listchars = {}
 					vim.o.statuscolumn = ""
 				end,
