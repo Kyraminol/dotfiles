@@ -252,7 +252,7 @@ $env.config = {
         # 133;C - Mark pre-execution
         # 133;D;exit - Mark execution finished with exit code
         # This is used to enable terminals to know where the prompt is, the command is, where the command finishes, and where the output of the command is
-        osc133: true
+        osc133: false
         # osc633 is closely related to osc133 but only exists in visual studio code (vscode) and supports their shell integration features
         # 633;A - Mark prompt start
         # 633;B - Mark prompt end
@@ -893,51 +893,63 @@ $env.config = {
     ]
 }
 
-do --env {
+let user = if $nu.os-info.name == "windows" {
+  $env.USERNAME
+} else {
+  $env.USER
+}
+
+if $nu.os-info.name != "windows" {
+  do --env {
     let ssh_agent_file = (
-        $nu.temp-path | path join $"ssh-agent-($env.USER).nuon"
+      $nu.temp-dir | path join $"ssh-agent-($user).nuon"
     )
 
     if ($ssh_agent_file | path exists) {
-        let ssh_agent_env = open ($ssh_agent_file)
-        if ($"/proc/($ssh_agent_env.SSH_AGENT_PID)" | path exists) {
-            load-env $ssh_agent_env
-            return
-        } else {
-            rm $ssh_agent_file
-        }
+      let ssh_agent_env = open ($ssh_agent_file)
+
+      if ($"/proc/($ssh_agent_env.SSH_AGENT_PID)" | path exists) {
+        load-env $ssh_agent_env
+        return
+      } else {
+        rm $ssh_agent_file
+      }
     }
 
     let ssh_agent_env = ^ssh-agent -c
-        | lines
-        | first 2
-        | parse "setenv {name} {value};"
-        | transpose --header-row
-        | into record
+      | lines
+      | first 2
+      | parse "setenv {name} {value};"
+      | transpose --header-row
+      | into record
     load-env $ssh_agent_env
     $ssh_agent_env | save --force $ssh_agent_file
+  }
 }
 
 $env.VISUAL = "nvim"
 $env.EDITOR = "nvim"
 
-$env.GOPATH = $"($env.HOME)/.go"
-$env.PATH = ($env.PATH | append $"($env.HOME)/.local/bin" | append $"($env.HOME)/.cargo/bin" | append $"($env.HOME)/.go/bin")
-
-# zellij
-def start_zellij [] {
-  if 'ZELLIJ' not-in ($env | columns) {
-    if 'ZELLIJ_AUTO_ATTACH' in ($env | columns) and $env.ZELLIJ_AUTO_ATTACH == 'true' {
-      zellij attach -c
-    } else {
-      zellij
-    }
-
-    if 'ZELLIJ_AUTO_EXIT' in ($env | columns) and $env.ZELLIJ_AUTO_EXIT == 'true' {
-      exit
-    }
-  }
-}
+$env.GOPATH = $"($nu.home-dir)/.go"
+$env.PATH = ($env.PATH | append $"($nu.home-dir)/.local/bin" | append $"($nu.home-dir)/.cargo/bin" | append $"($env.GOPATH)/bin")
 
 use ./fnm.nu
-start_zellij
+
+# zellij
+if $nu.os-info.name != "windows" {
+  def start_zellij [] {
+    if 'ZELLIJ' not-in ($env | columns) {
+      if 'ZELLIJ_AUTO_ATTACH' in ($env | columns) and $env.ZELLIJ_AUTO_ATTACH == 'true' {
+        zellij attach -c
+      } else {
+        zellij
+      }
+
+      if 'zellij_auto_exit' in ($env | columns) and $env.zellij_auto_exit == 'true' {
+        exit
+      }
+    }
+  }
+
+  start_zellij
+}
