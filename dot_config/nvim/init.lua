@@ -90,7 +90,7 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 
 vim.o.statuscolumn =
-	"%s%=%{printf('%' .. max([len(v:relnum), 3]) .. 'd', v:lnum)}│%=%{printf('%' .. max([len(v:lnum), 3]) .. 'd', v:relnum)}│ "
+	"%s%=%{printf('%' .. max([len(v:relnum), 3]) .. 'd', v:lnum)}│%=%{printf('%' .. max([len(v:lnum), 3]) .. 'd', v:relnum)}│%C"
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
