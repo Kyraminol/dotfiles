@@ -127,6 +127,8 @@ return {
 					vim.o.statuscolumn = original_values.statuscolumn
 				end,
 			})
+
+			vim.keymap.set("n", "gH", "<cmd>Spaceport<CR>")
 		end,
 	},
 }
