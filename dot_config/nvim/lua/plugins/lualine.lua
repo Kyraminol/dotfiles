@@ -34,16 +34,18 @@ return {
 			require("lualine").setup({
 				options = {
 					globalstatus = true,
-					-- component_separators = { left = "", right = "" },
-					-- section_separators = { left = "", right = "" },
 				},
 				tabline = {
-					lualine_a = { "buffers" },
-					lualine_b = { "branch" },
-					lualine_c = { "filename" },
-					lualine_x = {},
-					lualine_y = {},
-					lualine_z = { "tabs" },
+					lualine_a = {
+						"buffers",
+						mode = 0,
+						max_length = vim.o.columns,
+						symbols = {
+							modified = " ●",
+							alternate_file = "#",
+							directory = "",
+						},
+					},
 				},
 				sections = {
 					lualine_a = {
@@ -57,29 +59,8 @@ return {
 							end,
 						},
 					},
-					-- lualine_b = {},
-					-- lualine_c = {
-					-- 	{ "filename", path = 1 },
-					-- 	{ "branch" },
-					-- 	{ "diff" },
-					-- 	{ "diagnostics" },
-					-- 	{ macro },
-					-- },
-					-- lualine_x = {
-					-- 	{ lsp_status },
-					-- 	{ "filetype" },
-					-- },
-					-- lualine_y = { { "progress" }, { "location" } },
-					-- lualine_z = {},
 				},
-				inactive_sections = {
-					-- lualine_a = {},
-					-- lualine_b = {},
-					-- lualine_c = { "filename" },
-					-- lualine_x = { "location" },
-					-- lualine_y = {},
-					-- lualine_z = {},
-				},
+				inactive_sections = {},
 			})
 		end,
 	},
