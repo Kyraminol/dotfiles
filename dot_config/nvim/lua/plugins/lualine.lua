@@ -37,13 +37,15 @@ return {
 				},
 				tabline = {
 					lualine_a = {
-						"buffers",
-						mode = 0,
-						max_length = vim.o.columns,
-						symbols = {
-							modified = " ●",
-							alternate_file = "#",
-							directory = "",
+						{
+							"buffers",
+							mode = 0,
+							max_length = vim.o.columns,
+							symbols = {
+								modified = " ●",
+								alternate_file = "#",
+								directory = "",
+							},
 						},
 					},
 				},
