@@ -560,3 +560,5 @@ show_startup_tips false
 // Default: true
 //
 // show_release_notes false
+
+stacked_pane_list false
