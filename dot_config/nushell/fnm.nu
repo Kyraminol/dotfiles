@@ -21,7 +21,7 @@ export-env {
 
         # Special handling for PATH environment variable
         # Get the actual PATH variable name used in the current environment (considering case sensitivity)
-        let env_used_path = ($env | columns | where {str downcase | $in == "path"} | get 0)
+        let env_used_path = ($env | columns | where {str lowercase | $in == "path"} | get 0)
         # Get and split PATH value into array
         let path_value = ($pwsh_vars | get 0.value | split row (char esep))
         # Add the processed PATH to the environment variable collection
