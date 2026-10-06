@@ -1,0 +1,8 @@
+[status]
+sep_left  = { open = "", close = "\ue0b0" }
+sep_right = { open = "\ue0b2", close = "" }
+
+[indicator]
+preview = { bg = "#303030", underline = false }
+padding = { open = "▐", close = "▌" }
+
