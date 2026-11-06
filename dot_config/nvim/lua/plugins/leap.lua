@@ -1,6 +1,7 @@
 return {
 	{
 		url = "https://codeberg.org/andyg/leap.nvim",
+		event = "VeryLazy",
 		config = function()
 			local leap = require("leap")
 			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")

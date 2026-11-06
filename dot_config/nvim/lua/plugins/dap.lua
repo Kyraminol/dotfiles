@@ -1,6 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		event = "VeryLazy",
 		config = function()
 			local dap = require("dap")
 			local dap_utils = require("dap.utils")
@@ -147,12 +148,15 @@ return {
 	},
 	{
 		"jay-babu/mason-nvim-dap.nvim",
+		event = "VeryLazy",
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
+		event = "VeryLazy",
 	},
 	{
 		"MironPascalCaseFan/debugmaster.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"jbyuki/one-small-step-for-vimkind",

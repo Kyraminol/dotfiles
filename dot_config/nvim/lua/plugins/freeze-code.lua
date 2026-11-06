@@ -1,6 +1,7 @@
 return {
 	{
 		"alejandrosuero/freeze-code.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("freeze-code").setup({
 				open = true,

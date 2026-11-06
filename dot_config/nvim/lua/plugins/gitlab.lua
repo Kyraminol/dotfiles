@@ -2,9 +2,9 @@ return {
 	{
 		"harrisoncramer/gitlab.nvim",
 		branch = "develop",
+		event = "VeryLazy",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},

@@ -1,6 +1,7 @@
 return {
 	{
 		"emrearmagan/atlas.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"MeanderingProgrammer/render-markdown.nvim",
@@ -9,7 +10,9 @@ return {
 		---@type AtlasConfig
 		opts = {
 			ui = {
-				statusline = true,
+				statusline = {
+					enable = true,
+				},
 				picker = "auto",
 				listed_buffer = false,
 			},

@@ -1,7 +1,7 @@
 return {
 	{
 		"saifulapm/commasemi.nvim",
-		lazy = false,
+		event = "VeryLazy",
 		opts = {
 			leader = "<localleader>",
 			keymaps = true,

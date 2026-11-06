@@ -20,6 +20,7 @@ return {
 			-- Useful status updates for LSP.
 			{ "j-hui/fidget.nvim", opts = {} },
 		},
+		event = "VeryLazy",
 		config = function()
 			-- Brief aside: **What is LSP?**
 			--
@@ -210,6 +211,7 @@ return {
 	},
 	{
 		"kevinhwang91/nvim-ufo",
+		event = "VeryLazy",
 		dependencies = {
 			"kevinhwang91/promise-async",
 		},

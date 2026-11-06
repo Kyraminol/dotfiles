@@ -2,6 +2,7 @@ return {
 	{
 		"Dan7h3x/signup.nvim",
 		branch = "main",
+		event = "VeryLazy",
 		opts = {
 			silent = true,
 			icons = {

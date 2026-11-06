@@ -55,6 +55,7 @@ end
 do
 	vim.g.editorconfig = false
 
+	vim.o.relativenumber = true
 	vim.o.statuscolumn =
 		"%s%=%{printf('%' .. max([len(v:relnum), 3]) .. 'd', v:lnum)}│%=%{printf('%' .. max([len(v:lnum), 3]) .. 'd', v:relnum)}│%C"
 

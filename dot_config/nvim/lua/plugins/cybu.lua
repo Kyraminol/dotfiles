@@ -1,11 +1,8 @@
 return {
 	{
 		"ghillb/cybu.nvim",
-		branch = "main", -- timely updates
-		-- branch = "v1.x", -- won't receive breaking changes
-		requires = {
-			"nvim-lua/plenary.nvim",
-		}, -- optional for icon support
+		branch = "main",
+		event = "VeryLazy",
 		config = function()
 			local ok, cybu = pcall(require, "cybu")
 			if not ok then
@@ -14,9 +11,9 @@ return {
 			cybu.setup({
 				style = {
 					devicons = {
-						enabled = false, -- enable or disable web dev icons
-						colored = true, -- enable color for web dev icons
-						truncate = true, -- truncate wide icons to one char width
+						enabled = true,
+						colored = true,
+						truncate = true,
 					},
 				},
 			})

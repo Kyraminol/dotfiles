@@ -192,10 +192,8 @@ return {
 			},
 		},
 		dependencies = {
-			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			{ "ColinKennedy/mega.cmdparse", dependencies = { "ColinKennedy/mega.logging" } },
-			"nvim-telescope/telescope.nvim",
 			"folke/snacks.nvim",
 			"nvim-tree/nvim-web-devicons",
 			{
@@ -241,10 +239,10 @@ return {
 	},
 	{
 		"sudo-tee/opencode.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"MeanderingProgrammer/render-markdown.nvim",
 			"folke/snacks.nvim",
-			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
 			require("opencode").setup({})
